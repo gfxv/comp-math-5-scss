@@ -1,0 +1,109 @@
+@use "sass:list";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+$x-points: (0.1, 0.2, 0.3, 0.4, 0.5);
+$y-points: (1.25, 2.38, 3.79, 5.44, 7.14);
+$x: 0.35;
+
+/////////////////////////
+// Lagrange polynomial //
+/////////////////////////
+
+@function lagrange() {
+  $y: 0;
+  @for $i from 1 through list.length($y-points) {
+    $x-part: 1;
+    @for $j from 1 through list.length($x-points) {
+      @if $i != $j {
+        $x-part: calc($x-part * lagrange_x_part($i, $j));
+      }
+    }
+    $y: $y + calc(list.nth($y-points, $i) * $x-part);
+  }
+
+  @return $y;
+}
+
+@function lagrange_x_part($i_index, $j_index) {
+  $top: $x - list.nth($x-points, $j_index);
+  $bottom: list.nth($x-points, $i_index) - list.nth($x-points, $j_index);
+
+  @return calc($top / $bottom);
+}
+
+
+///////////////////////////
+// Newton div polynomial //
+///////////////////////////
+
+@function newton_div() {
+  $y: list.nth($y-points, 1);
+  @for $k from 2 through list.length($y-points) {
+    $x-part: 1;
+    @for $j from 1 through $k - 1 {
+      $x-part: calc($x-part * ($x - list.nth($x-points, $j)));
+    }
+    $y: $y + calc($x-part * newton_div_func(slice_list($x-points, 1, $k), slice_list($y-points, 1, $k)));
+  }
+
+  @return $y;
+}
+
+@function newton_div_func($sliced-x-points, $sliced-y-points) {
+  @if list.length($sliced-x-points) == 2 {
+    @return calc((last($sliced-y-points) - first($sliced-y-points)) / (last($sliced-x-points) - first($sliced-x-points)));
+  }
+
+  $left-arg: slice_list($sliced-x-points, 1, list.length($sliced-x-points) - 1);
+  $left-func: slice_list($sliced-y-points, 1, list.length($sliced-y-points) - 1);
+  $right-arg: slice_list($sliced-x-points, 2, list.length($sliced-x-points));
+  $right-func: slice_list($sliced-y-points, 2, list.length($sliced-y-points));
+
+  @return calc((newton_div_func($right-arg, $right-func) - newton_div_func($left-arg, $left-func)) / (last($sliced-x-points) - first($sliced-x-points)));
+}
+
+///////////////////////////
+// Newton end polynomial //
+///////////////////////////
+
+@function newton_end() {
+
+}
+
+
+//////////////////////
+// Helper functions //
+//////////////////////
+
+@function slice_list($list, $start, $end) {
+  $result: ();
+  @for $i from $start through $end {
+    $result: list.append($result, list.nth($list, $i));
+  }
+  @return $result;
+}
+
+@function first($list) {
+  @return list.nth($list, 1);
+}
+
+@function last($list) {
+  @return list.nth($list, length($list));
+}
+
+#input-value{
+  width: calc($x * 1px);
+}
+
+#lagrange-result {
+  background-color: red;
+  width: calc(lagrange() * 1px);
+  height: 10px;
+}
+
+#newton-div-result {
+  background-color: red;
+  width: calc(newton_div() * 1px);
+  height: 10px;
+}

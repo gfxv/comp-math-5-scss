@@ -1,0 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+#input-value {
+  width: 0.35px;
+}
+
+#lagrange-result {
+  background-color: red;
+  width: 4.593359375px;
+  height: 10px;
+}
+
+#newton-div-result {
+  background-color: red;
+  width: 4.593359375px;
+  height: 10px;
+}/*# sourceMappingURL=index.css.map */
