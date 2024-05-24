@@ -1,4 +1,21 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+#canvas {
+  width: 75%;
+  height: 500px;
+  margin: auto;
+  position: relative;
+  z-index: -100;
+  background-color: rgb(238, 238, 238);
+}
+
+.point {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 0;
+}
+
 #input-value {
   width: 0.35px;
 }
@@ -19,4 +36,39 @@
   background-color: rgb(96, 96, 233);
   width: 4.593359375px;
   height: 10px;
+}
+
+#point-1 {
+  bottom: 17.5070028011%;
+  left: 20%;
+  color: rgb(183, 14, 14);
+  z-index: 100;
+}
+
+#point-2 {
+  bottom: 33.3333333333%;
+  left: 40%;
+  color: rgb(183, 14, 14);
+  z-index: 100;
+}
+
+#point-3 {
+  bottom: 53.081232493%;
+  left: 60%;
+  color: rgb(183, 14, 14);
+  z-index: 100;
+}
+
+#point-4 {
+  bottom: 76.1904761905%;
+  left: 80%;
+  color: rgb(183, 14, 14);
+  z-index: 100;
+}
+
+#point-5 {
+  bottom: 100%;
+  left: 0;
+  color: rgb(183, 14, 14);
+  z-index: 100;
 }/*# sourceMappingURL=index.css.map */

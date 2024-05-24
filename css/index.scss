@@ -2,10 +2,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 $line-color: rgb(96, 96, 233);
+$canvas-bg-color: rgb(238, 238, 238);
 
 $x-points: (0.1, 0.2, 0.3, 0.4, 0.5);
 $y-points: (1.25, 2.38, 3.79, 5.44, 7.14);
 $x: 0.35;
+
+#canvas {
+  width: 75%;
+  height: 500px;
+  margin: auto;
+  position: relative;
+  z-index: -100;
+  background-color: $canvas-bg-color;
+}
+
+.point {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  // background-color: $canvas-bg-color;
+  position: absolute;
+  bottom: 0;
+}
 
 /////////////////////////
 // Lagrange polynomial //
@@ -133,4 +152,36 @@ $x: 0.35;
   background-color: $line-color;
   width: calc(gauss() * 1px);
   height: 10px;
+}
+
+
+/////////////////
+// Draw points //
+/////////////////
+
+
+$y-max: max($y-points...);
+$y-min: min($y-points...);
+$x-max: max($x-points...);
+$x-min: min($x-points...);
+@for $p from 1 through list.length($x-points) {
+  $x-pos: 0;
+  $y-pos: 0;
+  @if list.nth($y-points, $p) == $y-max {
+    $y-pos: 100%;
+  } @else if list.nth($x-points, $p) == $x-max {
+    $x-pos: 100%;
+  } @else {
+    $x-pos: calc(list.nth($x-points, $p) * 100% / $x-max);
+    $y-pos: calc(list.nth($y-points, $p) * 100% / $y-max);
+    @debug $x-pos;
+    @debug $y-pos;
+  }
+
+  #point-#{$p} {
+    bottom: $y-pos;
+    left: $x-pos;
+    color: rgb(183, 14, 14);
+    z-index: 100;
+  }
 }
