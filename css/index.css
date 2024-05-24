@@ -4,13 +4,19 @@
 }
 
 #lagrange-result {
-  background-color: red;
+  background-color: rgb(96, 96, 233);
   width: 4.593359375px;
   height: 10px;
 }
 
 #newton-div-result {
-  background-color: red;
+  background-color: rgb(96, 96, 233);
+  width: 4.593359375px;
+  height: 10px;
+}
+
+#gauss-result {
+  background-color: rgb(96, 96, 233);
   width: 4.593359375px;
   height: 10px;
 }/*# sourceMappingURL=index.css.map */

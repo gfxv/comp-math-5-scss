@@ -1,6 +1,7 @@
 @use "sass:list";
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
+$line-color: rgb(96, 96, 233);
 
 $x-points: (0.1, 0.2, 0.3, 0.4, 0.5);
 $y-points: (1.25, 2.38, 3.79, 5.44, 7.14);
@@ -63,12 +64,28 @@ $x: 0.35;
   @return calc((newton_div_func($right-arg, $right-func) - newton_div_func($left-arg, $left-func)) / (last($sliced-x-points) - first($sliced-x-points)));
 }
 
-///////////////////////////
-// Newton end polynomial //
-///////////////////////////
 
-@function newton_end() {
+//////////////////////
+// Gauss polynomial //
+//////////////////////
 
+@function gauss() {
+  $n: list.length($x-points);
+  $result: 0;
+
+  @for $i from 1 through $n {
+    $term: 1;
+
+    @for $j from 1 through $n {
+      @if $j != $i {
+        $term: $term * ($x - list.nth($x-points, $j)) / (list.nth($x-points, $i) - list.nth($x-points, $j));
+      }
+    }
+
+    $result: $result + list.nth($y-points, $i) * $term;
+  }
+
+  @return $result;
 }
 
 
@@ -92,18 +109,28 @@ $x: 0.35;
   @return list.nth($list, length($list));
 }
 
+/////////////////////
+// 'Print' results //
+/////////////////////
+
 #input-value{
   width: calc($x * 1px);
 }
 
 #lagrange-result {
-  background-color: red;
+  background-color: $line-color;
   width: calc(lagrange() * 1px);
   height: 10px;
 }
 
 #newton-div-result {
-  background-color: red;
+  background-color: $line-color;
   width: calc(newton_div() * 1px);
+  height: 10px;
+}
+
+#gauss-result {
+  background-color: $line-color;
+  width: calc(gauss() * 1px);
   height: 10px;
 }
