@@ -4,24 +4,22 @@
 $line-color: rgb(96, 96, 233);
 $canvas-bg-color: rgb(238, 238, 238);
 
-$x-points: (0.1, 0.2, 0.3, 0.4, 0.5);
-$y-points: (1.25, 2.38, 3.79, 5.44, 7.14);
+$x-points: (0.1, 0.2, 0.3, 0.4, 0.5, 0.6);
+$y-points: (1.25, 2.38, 3.79, 5.44, 7.14, 8.4);
 $x: 0.35;
 
 #canvas {
   width: 75%;
   height: 500px;
+  border: 1px solid black;
   margin: auto;
   position: relative;
-  z-index: -100;
-  background-color: $canvas-bg-color;
 }
 
 .point {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  // background-color: $canvas-bg-color;
   position: absolute;
   bottom: 0;
 }
@@ -159,29 +157,61 @@ $x: 0.35;
 // Draw points //
 /////////////////
 
+@function calc_y_pos($elem) {
+  @if $elem == $y-max {
+    @return 95%;
+  }
+  @return calc($elem * 100% / $y-max);
+}
+
+@function calc_x_pos($elem) {
+  @if $elem == $x-max {
+    @return 95%;
+  }
+  @return calc($elem * 100% / $x-max);
+}
+
 
 $y-max: max($y-points...);
 $y-min: min($y-points...);
 $x-max: max($x-points...);
 $x-min: min($x-points...);
 @for $p from 1 through list.length($x-points) {
-  $x-pos: 0;
-  $y-pos: 0;
-  @if list.nth($y-points, $p) == $y-max {
-    $y-pos: 100%;
-  } @else if list.nth($x-points, $p) == $x-max {
-    $x-pos: 100%;
-  } @else {
-    $x-pos: calc(list.nth($x-points, $p) * 100% / $x-max);
-    $y-pos: calc(list.nth($y-points, $p) * 100% / $y-max);
-    @debug $x-pos;
-    @debug $y-pos;
-  }
+  $x-pos: calc_x_pos(list.nth($x-points, $p));
+  $y-pos: calc_y_pos(list.nth($y-points, $p));
+  // @if list.nth($y-points, $p) == $y-max {
+  //   $y-pos: 100%;
+  // } 
+  // @else if list.nth($x-points, $p) == $x-max {
+  //   $x-pos: 100%;
+  // } 
+  // @else {
+  //   $x-pos: calc(list.nth($x-points, $p) * 100% / $x-max);
+  //   $y-pos: calc(list.nth($y-points, $p) * 100% / $y-max);
+  // }
 
   #point-#{$p} {
     bottom: $y-pos;
     left: $x-pos;
-    color: rgb(183, 14, 14);
+    background-color: rgb(83, 84, 173);
     z-index: 100;
   }
+}
+
+#lagrange-point {
+  background-color: green;
+  bottom: calc_y_pos(lagrange());
+  left: calc_x_pos($x);
+}
+
+#newton-point {
+  background-color: red;
+  bottom: calc_y_pos(newton_div());
+  left: calc_x_pos($x);
+}
+
+#gauss-point {
+  background-color: black;
+  bottom: calc_y_pos(gauss());
+  left: calc_x_pos($x);
 }

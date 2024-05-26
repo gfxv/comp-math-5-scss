@@ -2,10 +2,9 @@
 #canvas {
   width: 75%;
   height: 500px;
+  border: 1px solid black;
   margin: auto;
   position: relative;
-  z-index: -100;
-  background-color: rgb(238, 238, 238);
 }
 
 .point {
@@ -22,53 +21,78 @@
 
 #lagrange-result {
   background-color: rgb(96, 96, 233);
-  width: 4.593359375px;
+  width: 4.5916015625px;
   height: 10px;
 }
 
 #newton-div-result {
   background-color: rgb(96, 96, 233);
-  width: 4.593359375px;
+  width: 4.5916015625px;
   height: 10px;
 }
 
 #gauss-result {
   background-color: rgb(96, 96, 233);
-  width: 4.593359375px;
+  width: 4.5916015625px;
   height: 10px;
 }
 
 #point-1 {
-  bottom: 17.5070028011%;
-  left: 20%;
-  color: rgb(183, 14, 14);
+  bottom: 14.880952381%;
+  left: 16.6666666667%;
+  background-color: rgb(83, 84, 173);
   z-index: 100;
 }
 
 #point-2 {
-  bottom: 33.3333333333%;
-  left: 40%;
-  color: rgb(183, 14, 14);
+  bottom: 28.3333333333%;
+  left: 33.3333333333%;
+  background-color: rgb(83, 84, 173);
   z-index: 100;
 }
 
 #point-3 {
-  bottom: 53.081232493%;
-  left: 60%;
-  color: rgb(183, 14, 14);
+  bottom: 45.119047619%;
+  left: 50%;
+  background-color: rgb(83, 84, 173);
   z-index: 100;
 }
 
 #point-4 {
-  bottom: 76.1904761905%;
-  left: 80%;
-  color: rgb(183, 14, 14);
+  bottom: 64.7619047619%;
+  left: 66.6666666667%;
+  background-color: rgb(83, 84, 173);
   z-index: 100;
 }
 
 #point-5 {
-  bottom: 100%;
-  left: 0;
-  color: rgb(183, 14, 14);
+  bottom: 85%;
+  left: 83.3333333333%;
+  background-color: rgb(83, 84, 173);
   z-index: 100;
+}
+
+#point-6 {
+  bottom: 95%;
+  left: 95%;
+  background-color: rgb(83, 84, 173);
+  z-index: 100;
+}
+
+#lagrange-point {
+  background-color: green;
+  bottom: 54.6619233631%;
+  left: 58.3333333333%;
+}
+
+#newton-point {
+  background-color: red;
+  bottom: 54.6619233631%;
+  left: 58.3333333333%;
+}
+
+#gauss-point {
+  background-color: black;
+  bottom: 54.6619233631%;
+  left: 58.3333333333%;
 }/*# sourceMappingURL=index.css.map */
